@@ -117,7 +117,9 @@ async function fetchService() {
 				if (error) {
 					if (error.code === "ENOTFOUND") {
 						httpState = "could not resolve ip";
-					} else console.error(new Error(error));
+					} else if (error.code === "EAI_AGAIN") {
+						httpState = "network connectivity error";
+					} else console.error(error);
 					resolve();
 				}
 
